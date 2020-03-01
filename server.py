@@ -35,4 +35,4 @@ api.add_resource(Submission, '/submission/<string:test>')
 
 if __name__ == '__main__':
     CORS(app)
-    app.run(port=5002)
+    app.run(port=5004)
