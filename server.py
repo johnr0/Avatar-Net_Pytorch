@@ -23,8 +23,12 @@ api = Api(app)
 # network.load_state_dict(check_point['state_dict'])
 # network = network.to(device)
 
+
 class Forward(Resource):
     def get(self):
+        return "forward"
+        
+    def post(self):
         # do something
         return "forward"
 
