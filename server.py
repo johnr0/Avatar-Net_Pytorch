@@ -35,7 +35,17 @@ class Forward(Resource):
         parser.add_argument('style_num')
         content = parser.parse_args()['content']
         style_num = parser.parse_args()['style_num']
-        print(style_num)
+        styles = []
+        style_weights = []
+        for i in range(style_num):
+            parser.add_argument('style_'+str(i))
+            parser.add_argument('style_weight_'+str(i))
+            style = parser.parse_args()['style_'+str(i)]
+            style_weight = parser.parse_args()['style_weight_'+str(i)]
+            styles.append(style)
+            style_weights.append(style_weights)
+
+        print(style_num, len(styles), len(style_weights))
         return "forward"
 
 
