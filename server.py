@@ -44,9 +44,10 @@ class Forward(Resource):
             style_weight = parser.parse_args()['style_weight_'+str(i)]
             styles.append(style)
             style_weights.append(float(style_weight))
+        print("til here")
         network_test_web(device, network, 600, 0.5, 5, 0, style_weights, content, styles, None, False)
 
-        print(style_num, len(styles), len(style_weights), type(content))
+        # print(style_num, len(styles), len(style_weights), type(content))
         return "forward"
 
 
