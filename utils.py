@@ -77,9 +77,14 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False):
     return transformer(im).unsqueeze(0)
 
 def result_to_web(result):
-    transformer = transforms.to_pil_image()
-    im = transformer(result)
+    im = imshow(result)
     print(type(im))
+    buffered = BytesIO()
+    im.save(buffered, format="PNG")
+    img_str = base64.b64encode(buffered.getvalue())
+    print(img_str)
+    return img_str
+
 
 def imshow(tensor):
     denormalize = _normalizer(denormalize=True)    
