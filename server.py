@@ -36,7 +36,8 @@ class Forward(Resource):
         parser.add_argument('style_content_weight')
         content = parser.parse_args()['content']
         style_num = parser.parse_args()['style_num']
-        style_content_weight = parser.parse_args()['style_content_weight']
+        style_content_weight = float(parser.parse_args()['style_content_weight'])
+        print('scw', style_content_weight)
         styles = []
         style_weights = []
         for i in range(int(style_num)):
