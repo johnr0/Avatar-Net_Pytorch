@@ -13,15 +13,15 @@ app = Flask(__name__)
 api = Api(app)
 
 # # set device
-# device = torch.device('cuda' if args.gpu_no >= 0 else 'cpu')
+device = torch.device('cuda')# if args.gpu_no >= 0 else 'cpu')
 
 # # load check point
-# check_point = torch.load(args.check_point)
+check_point = torch.load('./models/check_point.pth')
 
 # # load network
-# network = AvatarNet(args.layers)
-# network.load_state_dict(check_point['state_dict'])
-# network = network.to(device)
+network = AvatarNet([1, 6, 11, 20])
+network.load_state_dict(check_point['state_dict'])
+network = network.to(device)
 
 
 class Forward(Resource):
@@ -44,6 +44,7 @@ class Forward(Resource):
             style_weight = parser.parse_args()['style_weight_'+str(i)]
             styles.append(style)
             style_weights.append(float(style_weight))
+        network_test_web(device, network, 600, 0.5, 5, 0, style_weights, content, styles, None, False)
 
         print(style_num, len(styles), len(style_weights), type(content))
         return "forward"
