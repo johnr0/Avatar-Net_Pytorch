@@ -80,7 +80,7 @@ def result_to_web(result):
     im = imshow(result)
     print(type(im))
     buffered = BytesIO()
-    im.save(buffered, format="PNG")
+    im.save(buffered, format="png")
     img_str = base64.b64encode(buffered.getvalue())
     img_str=img_str.decode('utf-8')
     print(type(img_str))

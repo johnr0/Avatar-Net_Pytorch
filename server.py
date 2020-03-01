@@ -33,8 +33,10 @@ class Forward(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('content')
         parser.add_argument('style_num')
+        parser.add_argument('style_content_weight')
         content = parser.parse_args()['content']
         style_num = parser.parse_args()['style_num']
+        style_content_weight = parser.parse_args()['style_content_weight']
         styles = []
         style_weights = []
         for i in range(int(style_num)):
@@ -45,7 +47,7 @@ class Forward(Resource):
             styles.append(style)
             style_weights.append(float(style_weight))
         print("til here")
-        result = network_test_web(device, network, 600, 0.5, 5, 1, style_weights, content, styles, None, False)
+        result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False)
 
         img_result = result_to_web(result)
 
