@@ -52,4 +52,4 @@ def network_test_web(device, network, imsize, style_strength, patch_size, patch_
     # imsave(stylized_img, 'stylized_image.jpg')
     print(type(stylized_img))
 
-    return None
+    return stylized_img
