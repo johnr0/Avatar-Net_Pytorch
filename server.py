@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
 
 from test import network_test_web
@@ -27,9 +27,13 @@ api = Api(app)
 class Forward(Resource):
     def get(self):
         return "forward"
-        
+
     def post(self):
         # do something
+        parser = reqparse.RequestParser()
+        parser.add_argument('content')
+        args = parser.parse_args()['content']
+        print(args)
         return "forward"
 
 
