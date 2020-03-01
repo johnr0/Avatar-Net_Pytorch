@@ -76,6 +76,11 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False):
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGB")
     return transformer(im).unsqueeze(0)
 
+def result_to_web(result):
+    transformer = transforms.to_pil_image()
+    im = transformer(result)
+    print(type(im))
+
 def imshow(tensor):
     denormalize = _normalizer(denormalize=True)    
     if tensor.is_cuda:

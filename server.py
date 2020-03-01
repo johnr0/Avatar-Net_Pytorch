@@ -7,7 +7,7 @@ from test import network_test_web
 import torch
 
 from network import AvatarNet
-from utils import imload, imsave, maskload
+from utils import imload, imsave, maskload, result_to_web
 
 app = Flask(__name__)
 api = Api(app)
@@ -45,7 +45,9 @@ class Forward(Resource):
             styles.append(style)
             style_weights.append(float(style_weight))
         print("til here")
-        network_test_web(device, network, 600, 0.5, 5, 1, style_weights, content, styles, None, False)
+        result = network_test_web(device, network, 600, 0.5, 5, 1, style_weights, content, styles, None, False)
+
+        result_to_web(result)
 
         # print(style_num, len(styles), len(style_weights), type(content))
         return "forward"

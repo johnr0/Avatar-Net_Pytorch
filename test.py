@@ -37,8 +37,8 @@ def network_test_web(device, network, imsize, style_strength, patch_size, patch_
 
     # TODO switch below
     # load target images
-    content_img = imload_web(content, imsize, cropsize).to(device)
-    style_imgs = [imload_web(style, imsize, cropsize, cencrop).to(device) for style in styles]
+    content_img = imload_web(content, None, cropsize).to(device)
+    style_imgs = [imload_web(style, None, cropsize, cencrop).to(device) for style in styles]
     masks = None
     # if False:#args.mask:
     #     masks = [maskload(mask).to(device) for mask in args.mask]
