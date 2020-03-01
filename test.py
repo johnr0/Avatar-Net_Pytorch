@@ -31,3 +31,24 @@ def network_test(args):
     imsave(stylized_img, 'stylized_image.jpg')
 
     return None
+
+
+def network_test_web(device, network, style_strength, patch_size, patch_stride, interpolation_weights, args):# TODO remove args
+
+    # TODO switch below
+    # load target images
+    content_img = imload(args.content, args.imsize, args.cropsize).to(device)
+    style_imgs = [imload(style, args.imsize, args.cropsize, args.cencrop).to(device) for style in args.style]
+    masks = None
+    if args.mask:
+        masks = [maskload(mask).to(device) for mask in args.mask]
+
+    # stylize image
+    with torch.no_grad():
+        stylized_img =  network(content_img, style_imgs, style_strength, patch_size, patch_stride,
+                masks, interpolation_weights, False)
+
+    # TODO update this to be exporting
+    imsave(stylized_img, 'stylized_image.jpg')
+
+    return None
