@@ -6,6 +6,9 @@ import torchvision.transforms as transforms
 
 from PIL import Image
 
+from io import BytesIO
+import base64
+
 def lastest_arverage_value(values, length=100):
     if len(values) < length:
         length = len(values)
@@ -63,6 +66,15 @@ def imsave(tensor, path):
 def imload(path, imsize=None, cropsize=None, cencrop=False):
     transformer = _transformer(imsize, cropsize, cencrop)
     return transformer(Image.open(path).convert("RGB")).unsqueeze(0)
+
+def imload_web(path, imsize=None, cropsize=None, cencrop=False):
+    transformer = _transformer(imsize, cropsize, cencrop)
+    path_list = path.split('base64,')
+    image_string = path_list[1]
+    data = {}
+    data['img'] = image_string
+    im = Image.open(BytesIO(base64.b64decode(data))).convert("RGB")
+    return transformer(im).unsqueeze(0)
 
 def imshow(tensor):
     denormalize = _normalizer(denormalize=True)    
