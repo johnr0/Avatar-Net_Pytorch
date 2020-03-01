@@ -35,7 +35,7 @@ class Forward(Resource):
         parser.add_argument('style_num')
         content = parser.parse_args()['content']
         style_num = parser.parse_args()['style_num']
-        print(args)
+        print(style_num)
         return "forward"
 
 
