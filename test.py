@@ -1,7 +1,7 @@
 import torch
 
 from network import AvatarNet
-from utils import imload, imload_web imsave, maskload
+from utils import imload, imload_web, imsave, maskload
 
 
 def network_test(args):
