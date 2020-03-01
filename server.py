@@ -32,6 +32,7 @@ class Forward(Resource):
         # do something
         parser = reqparse.RequestParser()
         parser.add_argument('content')
+        parser.add_argument('style_num')
         content = parser.parse_args()['content']
         style_num = parser.parse_args()['style_num']
         print(args)
