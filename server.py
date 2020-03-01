@@ -23,14 +23,14 @@ api = Api(app)
 # network.load_state_dict(check_point['state_dict'])
 # network = network.to(device)
 
-class Submission(Resource):
-    def get(self, test):
+class Forward(Resource):
+    def get(self):
         # do something
-        return test
+        return "forward"
 
 
 
-api.add_resource(Submission, '/submission/<string:test>')
+api.add_resource(Forward, '/forward')
 
 
 if __name__ == '__main__':
