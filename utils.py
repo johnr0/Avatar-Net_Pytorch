@@ -87,6 +87,7 @@ def imshow(tensor):
         tensor = tensor.cpu()    
     tensor = torchvision.utils.make_grid(denormalize(tensor.squeeze(0)))
     image = transforms.functional.to_pil_image(tensor.clamp_(0.0, 1.0))
+    print(type(image))
     return image
 
 def maskload(path):

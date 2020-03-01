@@ -47,7 +47,7 @@ class Forward(Resource):
         print("til here")
         result = network_test_web(device, network, 600, 0.5, 5, 1, style_weights, content, styles, None, False)
 
-        result_to_web(result)
+        imshow(result)
 
         # print(style_num, len(styles), len(style_weights), type(content))
         return "forward"
