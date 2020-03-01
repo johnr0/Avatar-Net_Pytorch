@@ -7,7 +7,7 @@ from test import network_test_web
 import torch
 
 from network import AvatarNet
-from utils import imload, imsave, maskload, result_to_web
+from utils import imload, imsave, maskload, imshow
 
 app = Flask(__name__)
 api = Api(app)
