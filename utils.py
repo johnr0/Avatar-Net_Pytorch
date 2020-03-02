@@ -109,14 +109,13 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'
 def result_to_web(result, masking):
     im = imshow(result)
     im = im.convert("RGBA")
-    # print('result image', im)
-    # masking_img = maskingload(masking)
+    print('result image', im)
+    masking_img = maskingload(masking)
 
-    # # w, h = masking_img.size
-    # # tr = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     # im.putalpha(masking_img)
     # print(im)
-    # # im = Image.composite(tr ,im, masking_img)
+
+    im=masking_img
 
     buffered = BytesIO()
     im.save(buffered, format="png")
