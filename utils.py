@@ -114,10 +114,8 @@ def result_to_web(result, masking):
     print('result image', im)
     masking_img = maskingload(masking)
 
-    # im.putalpha(masking_img)
+    im.putalpha(masking_img)
     # print(im)
-
-    im=masking_img
 
     buffered = BytesIO()
     im.save(buffered, format="png")
