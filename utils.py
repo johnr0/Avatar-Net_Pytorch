@@ -67,13 +67,15 @@ def imload(path, imsize=None, cropsize=None, cencrop=False):
     transformer = _transformer(imsize, cropsize, cencrop)
     return transformer(Image.open(path).convert("RGB")).unsqueeze(0)
 
-def imload_web(path, imsize=None, cropsize=None, cencrop=False):
+def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'):
     transformer = _transformer(imsize, cropsize, cencrop)
     path_list = path.split('base64,')
     image_string = path_list[1]
     # data = {}
     # data['img'] = image_string
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGB")
+    if bbox!='undefined':
+        im = im.crop((bbox[0], bbox[1], bbox[2], bbox[3]))
     return transformer(im).unsqueeze(0)
 
 def result_to_web(result):
