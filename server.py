@@ -32,9 +32,11 @@ class Forward(Resource):
         # do something
         parser = reqparse.RequestParser()
         parser.add_argument('content')
+        parser.add_argument('masking')
         parser.add_argument('style_num')
         parser.add_argument('style_content_weight')
         content = parser.parse_args()['content']
+        masking = parser.parse_args()['masking']
         style_num = parser.parse_args()['style_num']
         style_content_weight = float(parser.parse_args()['style_content_weight'])
         print('scw', style_content_weight)
@@ -62,7 +64,7 @@ class Forward(Resource):
             style_scales.append(float(style_scale))
             print(style_bbox, type(style_bbox))
         print("til here")
-        result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False, style_bboxes, style_scales)
+        result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False, style_bboxes, style_scales, masking)
 
         img_result = result_to_web(result)
 

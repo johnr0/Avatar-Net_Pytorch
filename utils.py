@@ -6,6 +6,8 @@ import torchvision.transforms as transforms
 
 from PIL import Image
 
+import numpy as np
+
 from io import BytesIO
 import base64
 
@@ -66,6 +68,14 @@ def imsave(tensor, path):
 def imload(path, imsize=None, cropsize=None, cencrop=False):
     transformer = _transformer(imsize, cropsize, cencrop)
     return transformer(Image.open(path).convert("RGB")).unsqueeze(0)
+
+def maskingload(path):
+    path_list = path.split('base64,')
+    image_string = path_list[1]
+    im = Image.open(BytesIO(base64.b64decode(image_string))).convert("L")
+    print(np.sum(im))
+
+    return im
 
 def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined', scale=False):
     transformer = _transformer(imsize, cropsize, cencrop)

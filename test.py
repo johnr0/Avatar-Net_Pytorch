@@ -33,11 +33,12 @@ def network_test(args):
     return None
 
 
-def network_test_web(device, network, imsize, style_strength, patch_size, patch_stride, interpolation_weights, content, styles, cropsize, cencrop, style_bboxes, style_scales):# TODO remove args
+def network_test_web(device, network, imsize, style_strength, patch_size, patch_stride, interpolation_weights, content, styles, cropsize, cencrop, style_bboxes, style_scales, masking):# TODO remove args
 
     # TODO switch below
     # load target images
     content_img = imload_web(content, None, cropsize).to(device)
+    masking_img = imload_web(masking, None, cropsize).to(device)
     style_imgs = [imload_web(style, None, cropsize, cencrop, style_bboxes[idx], style_scales[idx]).to(device) for idx, style in enumerate(styles)]
     masks = None
     # if False:#args.mask:
@@ -50,6 +51,6 @@ def network_test_web(device, network, imsize, style_strength, patch_size, patch_
 
     # TODO update this to be exporting
     # imsave(stylized_img, 'stylized_image.jpg')
-    print(type(stylized_img))
+    print('style is...', type(stylized_img))
 
     return stylized_img
