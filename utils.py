@@ -72,8 +72,16 @@ def imload(path, imsize=None, cropsize=None, cencrop=False):
 def maskingload(path):
     path_list = path.split('base64,')
     image_string = path_list[1]
-    im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGBA").convert("L")
-    print('maskingsum', im)
+    im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGBA")
+    print('maskingsum', im, np.sum(im))
+    pixdata = im.load()
+
+    width, height = im.size
+    for y in range(height):
+        for x in range(width):
+            if pixdata[x, y] == (255, 255, 255, 0):
+                pixdata[x, y] = (255, 255, 255, 255)
+    im.convert("L")
 
     return im
 
@@ -103,7 +111,7 @@ def result_to_web(result, masking):
     masking_img = maskingload(masking)
 
     w, h = masking_img.size
-    tr = Image.new('RGBA', (w, h), (255, 0, 0, 0))
+    tr = Image.new('RGBA', (w, h), (0, 0, 0, 0))
     
     im = Image.composite(tr ,im, masking_img)
 
