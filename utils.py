@@ -102,6 +102,10 @@ def result_to_web(result, masking):
     print(type(im))
     masking_img = maskingload(masking)
 
+    tr = Image.new('RGBA', (masking.width, masking.height), (255, 0, 0, 0))
+
+    im = Image.composite(tr ,im, masking_img)
+
     buffered = BytesIO()
     im.save(buffered, format="png")
     img_str = base64.b64encode(buffered.getvalue())
