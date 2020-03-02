@@ -82,6 +82,7 @@ def maskingload(path):
             if pixdata[x, y] == (255, 255, 255, 0):
                 pixdata[x, y] = (255, 255, 255, 255)
     im.convert("L")
+    print('masking postprocess', im)
 
     return im
 
@@ -108,7 +109,7 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'
 def result_to_web(result, masking):
     im = imshow(result)
     im.convert("RGBA")
-    print(type(im))
+    print('result image', im)
     masking_img = maskingload(masking)
 
     # w, h = masking_img.size
