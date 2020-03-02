@@ -64,9 +64,9 @@ class Forward(Resource):
             style_scales.append(float(style_scale))
             print(style_bbox, type(style_bbox))
         print("til here")
-        result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False, style_bboxes, style_scales, masking)
+        result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False, style_bboxes, style_scales)
 
-        img_result = result_to_web(result)
+        img_result = result_to_web(result, masking)
 
         # print(style_num, len(styles), len(style_weights), type(content))
         return {'result': img_result}

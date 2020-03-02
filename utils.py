@@ -73,7 +73,7 @@ def maskingload(path):
     path_list = path.split('base64,')
     image_string = path_list[1]
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("L")
-    print(np.sum(im))
+    print('maskingsum', np.sum(im))
 
     return im
 
@@ -97,9 +97,11 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'
         im = im.resize((n_w, n_h))
     return transformer(im).unsqueeze(0)
 
-def result_to_web(result):
+def result_to_web(result, masking):
     im = imshow(result)
     print(type(im))
+    masking_img = maskingload(masking)
+
     buffered = BytesIO()
     im.save(buffered, format="png")
     img_str = base64.b64encode(buffered.getvalue())
