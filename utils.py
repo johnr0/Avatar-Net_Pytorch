@@ -76,10 +76,10 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGB")
     if bbox!='undefined':
         im = im.crop((bbox[0], bbox[1], bbox[2], bbox[3]))
-    if scale!=False:
+    if scale!=False and scale!=1:
         w, h = im.size
-        n_w = scale*w
-        n_h = scale*h
+        n_w = int(scale*w)
+        n_h = int(scale*h)
         if n_w==0:
             n_w=1
         if n_h==0:
