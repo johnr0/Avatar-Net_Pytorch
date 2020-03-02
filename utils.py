@@ -73,7 +73,7 @@ def maskingload(path):
     path_list = path.split('base64,')
     image_string = path_list[1]
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGBA").convert("L")
-    print('maskingsum', np.sum(im))
+    print('maskingsum', im)
 
     return im
 
