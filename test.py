@@ -33,12 +33,12 @@ def network_test(args):
     return None
 
 
-def network_test_web(device, network, imsize, style_strength, patch_size, patch_stride, interpolation_weights, content, styles, cropsize, cencrop, style_bboxes):# TODO remove args
+def network_test_web(device, network, imsize, style_strength, patch_size, patch_stride, interpolation_weights, content, styles, cropsize, cencrop, style_bboxes, style_scales):# TODO remove args
 
     # TODO switch below
     # load target images
     content_img = imload_web(content, None, cropsize).to(device)
-    style_imgs = [imload_web(style, None, cropsize, cencrop, style_bboxes[idx]).to(device) for idx, style in enumerate(styles)]
+    style_imgs = [imload_web(style, None, cropsize, cencrop, style_bboxes[idx], style_scales[idx]).to(device) for idx, style in enumerate(styles)]
     masks = None
     # if False:#args.mask:
     #     masks = [maskload(mask).to(device) for mask in args.mask]
