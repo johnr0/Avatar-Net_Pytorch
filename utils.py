@@ -108,7 +108,7 @@ def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined'
 
 def result_to_web(result, masking):
     im = imshow(result)
-    im.convert("RGBA")
+    im = im.convert("RGBA")
     print('result image', im)
     masking_img = maskingload(masking)
 
