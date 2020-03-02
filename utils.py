@@ -102,8 +102,9 @@ def result_to_web(result, masking):
     print(type(im))
     masking_img = maskingload(masking)
 
-    tr = Image.new('RGBA', (masking.width, masking.height), (255, 0, 0, 0))
-
+    w, h = masking.size
+    tr = Image.new('RGBA', (w, h), (255, 0, 0, 0))
+    
     im = Image.composite(tr ,im, masking_img)
 
     buffered = BytesIO()
