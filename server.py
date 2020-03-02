@@ -40,13 +40,18 @@ class Forward(Resource):
         print('scw', style_content_weight)
         styles = []
         style_weights = []
+        style_bboxes = []
         for i in range(int(style_num)):
             parser.add_argument('style_'+str(i))
             parser.add_argument('style_weight_'+str(i))
+            parser.add_argument('style_bbox_'+str(i))
             style = parser.parse_args()['style_'+str(i)]
             style_weight = parser.parse_args()['style_weight_'+str(i)]
+            style_bbox = parser.parse_args()['style_bbox_'+str(i)]
             styles.append(style)
             style_weights.append(float(style_weight))
+            style_bboxes.append(float(style_bbox))
+            print(style_bbox, type(style_bbox))
         print("til here")
         result = network_test_web(device, network, 600, style_content_weight, 5, 1, style_weights, content, styles, None, False)
 
