@@ -73,18 +73,20 @@ def maskingload(path):
     path_list = path.split('base64,')
     image_string = path_list[1]
     im = Image.open(BytesIO(base64.b64decode(image_string))).convert("RGBA")
-    print('maskingsum', im, np.sum(im))
-    pixdata = im.load()
+    new_image = Image.new("RGBA", im.size, "WHITE") # Create a white rgba background
+    new_image.paste(im, (0, 0), im)              # Paste the image on the background. Go to the links given below for details.
+    # print('maskingsum', im, np.sum(im))
+    # pixdata = im.load()
 
-    width, height = im.size
-    for y in range(height):
-        for x in range(width):
-            if pixdata[x, y] == (255, 255, 255, 0):
-                pixdata[x, y] = (255, 255, 255, 255)
-    im = im.convert("L")
-    print('masking postprocess', im)
+    # width, height = im.size
+    # for y in range(height):
+    #     for x in range(width):
+    #         if pixdata[x, y] == (255, 255, 255, 0):
+    #             pixdata[x, y] = (255, 255, 255, 255)
+    new_image = new_image.convert("L")
+    print('masking postprocess', new_image)
 
-    return im
+    return new_image
 
 def imload_web(path, imsize=None, cropsize=None, cencrop=False, bbox='undefined', scale=False):
     transformer = _transformer(imsize, cropsize, cencrop)
