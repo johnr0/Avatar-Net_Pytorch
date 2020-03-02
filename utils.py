@@ -81,7 +81,7 @@ def maskingload(path):
         for x in range(width):
             if pixdata[x, y] == (255, 255, 255, 0):
                 pixdata[x, y] = (255, 255, 255, 255)
-    # im = im.convert("L")
+    im = im.convert("L")
     print('masking postprocess', im)
 
     return im
